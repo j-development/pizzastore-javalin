@@ -19,9 +19,9 @@ public class PizzaTest {
 	void unsuccessfullyCreatePizza() {
 		Pizza pizza1 = new Pizza(1, "VESUVIO", 100, 1);
 
-		assertNotEquals(1, pizza1.getId());
-		assertNotEquals("VESUVIO", pizza1.getName());
-		assertNotEquals(100, pizza1.getPrice());
-		assertNotEquals(1, pizza1.getPizzagroup());
+		assertNotEquals(2, pizza1.getId());
+		assertNotEquals("Margarita", pizza1.getName());
+		assertNotEquals(90, pizza1.getPrice());
+		assertNotEquals(2, pizza1.getPizzagroup());
 	}
 }
