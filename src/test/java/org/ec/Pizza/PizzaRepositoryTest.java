@@ -1,8 +1,12 @@
 package org.ec.Pizza;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
+
 
 public class PizzaRepositoryTest {
 
@@ -17,6 +21,15 @@ public class PizzaRepositoryTest {
 		pizzas = List.of(pizza1, pizza2, pizza3);
 	}
 
+	@Test
+	void testGetListOfPizzas() {
+		// given
+		Mockito.when(classUnderTest.findAll()).thenReturn(pizzas);
+		// when
+		List<Pizza> result = classUnderTest.findAll();
+		// then
+		Assertions.assertEquals(result, pizzas);
+	}
 
 
 }
