@@ -41,11 +41,12 @@ public class PizzaControllerTest {
 	void POST_ToCreateNewPizzaSuccessfully() throws Exception {
 		//given
 		var pizzaId = 1;
-		Pizza vesuvio1 = new Pizza(1, "VESUVIO", 100, 1);
-		Pizza vesuvio2 = new Pizza(1, "VESUVIO", 100, 1);
-		when(pizzaService.findPizzaById(pizzaId)).thenReturn(vesuvio1);
+		Pizza vesuvio1 = new Pizza(pizzaId, "VESUVIO", 100, 1);
+		when(ctx.json(vesuvio1)).thenReturn(ctx);
 		//when
-		classUnderTest.createPizza(vesuvio2).handle(ctx);
+		classUnderTest.createPizza().handle(ctx);
+		//then
+		verify(ctx).status(201);
 	}
 
 	@Test
