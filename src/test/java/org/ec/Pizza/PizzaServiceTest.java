@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,5 +35,24 @@ public class PizzaServiceTest {
 		assertThatThrownBy(() -> classUnderTest.addPizza(pizza1))
 				.isInstanceOf(PizzaNameAlreadyExists.class)
 				.hasMessageContaining("Pizza name "+pizzaName+" already taken");
+	}
+
+	@Test
+	void successfullyUpdatePizzaWithId(){
+		// given
+		int pizzaId = 1;
+
+		// Object 'mocked' from repository
+		Pizza pizza1 = new Pizza(pizzaId, "VESUVIO", 100, 1);
+		Mockito.when(pizzaRepository.findById(pizzaId)).thenReturn(Optional.of(pizza1));
+
+		// Object from user
+		Pizza pizza2 = new Pizza(pizzaId, "VESUVIO KEBAB", 105, 2);
+
+		// when
+		classUnderTest.updatePizza(pizza2);
+
+		// then
+
 	}
 }
