@@ -2,6 +2,7 @@ package org.ec.Pizza;
 
 import io.javalin.http.Context;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -34,6 +35,28 @@ public class PizzaControllerTest {
 		classUnderTest.fetchAllPizzas().handle(ctx);
 		//then
 		verify(ctx).json(pizzas);
+	}
 
+	@Test
+	void POST_ToCreateNewPizzaSuccessfully() throws Exception {
+		//given
+		var pizzaId = 1;
+		Pizza vesuvio1 = new Pizza(1, "VESUVIO", 100, 1);
+		Pizza vesuvio2 = new Pizza(1, "VESUVIO", 100, 1);
+		when(pizzaService.findPizzaById(pizzaId)).thenReturn(vesuvio1);
+		//when
+		classUnderTest.createPizza(vesuvio2).handle(ctx);
+	}
+
+	@Test
+	@Disabled
+	void PUT_ToUpdatePizzaSuccessfully() throws Exception {
+		//given
+		var pizzaId = 1;
+		Pizza vesuvio1 = new Pizza(1, "VESUVIO", 100, 1);
+		Pizza vesuvio2 = new Pizza(1, "VESUVIO", 100, 1);
+		when(pizzaService.findPizzaById(pizzaId)).thenReturn(vesuvio1);
+		//when
+//		classUnderTest.createPizza(vesuvio2).handle(ctx);
 	}
 }
