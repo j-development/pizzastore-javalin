@@ -30,7 +30,9 @@ public class Main {
 
 			@Override
 			public Optional<Pizza> findById(int id) {
-				return Optional.empty();
+				// Hardcoded for testing purposes
+				Pizza vesuvio = new Pizza(1, "VESUVIO", 100, 1);
+				return Optional.of(vesuvio);
 			}
 
 			@Override
@@ -40,14 +42,14 @@ public class Main {
 
 			@Override
 			public Boolean pizzaNameExists(String pizzaName) {
-				return null;
+				return false; // Hardcoded always false, for testing purposes
 			}
 		}));
 
 
 		Javalin App = Javalin.create()
-				.get("/", pizzaController.fetchAllPizzas())
-				.post("/", ctx -> ctx.result("Skapa en ny pizza"))
+				.get("/pizza", pizzaController.fetchAllPizzas())
+				.post("/pizza", pizzaController.createPizza())
 				.delete("/{id}", ctx -> ctx.result("Radera en specifik pizza baserat på id: " + ctx.pathParam("id")))
 				.get("/groups", ctx -> ctx.result("Hämta alla pizzagrupper"))
 				.put("/", ctx -> ctx.result("Uppdatera en specifik pizza"))
