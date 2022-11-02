@@ -1,9 +1,11 @@
 package org.ec.Pizza;
 
+import org.ec.Pizza.exceptions.PizzaNameAlreadyExists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -21,16 +23,15 @@ public class PizzaServiceTest {
 	}
 
 	@Test
-	void throwErrorWhenPizzaNameAlreadyTaken() {
+	void throwErrorWhenPizzaNameAlreadyTaken() throws PizzaNameAlreadyExists {
 		// given
-		Pizza pizza1 = new Pizza(1, "VESUVIO", 100, 1);
-		Pizza pizza2 = new Pizza(1, "VESUVIO", 100, 1);
+		String pizzaName = "VESUVIO";
+		Pizza pizza1 = new Pizza(1, pizzaName, 100, 1);
 		// when
-		classUnderTest.add(pizza1);
-		classUnderTest.add(pizza2);
+		Mockito.when(pizzaRepository.pizzaNameExists(pizzaName)).thenReturn(true);
 		// then
-		assertThatThrownBy(() -> classUnderTest.add(pizza2))
-				.isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("Pizza name already taken");
+		assertThatThrownBy(() -> classUnderTest.addPizza(pizza1))
+				.isInstanceOf(PizzaNameAlreadyExists.class)
+				.hasMessageContaining("Pizza name "+pizzaName+" already taken");
 	}
 }

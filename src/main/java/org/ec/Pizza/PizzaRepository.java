@@ -11,4 +11,7 @@ public interface PizzaRepository {
 	Optional<Pizza> findById(int id);
 
 	Pizza save(Pizza pizza);
+
+	Boolean pizzaNameExists(String pizzaName);
+
 }
