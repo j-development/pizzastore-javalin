@@ -1,15 +1,19 @@
 package org.ec.Pizza;
-
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
 
-
+@ExtendWith(MockitoExtension.class)
 public class PizzaRepositoryTest {
 
+	@Mock
+	PizzaRepository classUnderTest;
 	List<Pizza>	pizzas;
 
 	@BeforeEach
