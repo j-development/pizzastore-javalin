@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +30,8 @@ public class PizzaControllerTest {
 		when(pizzaService.getAllPizzas()).thenReturn(pizzas);
 		//when
 		classUnderTest.fetchAllPizzas();
-
+		//then
+		verify(ctx).json(pizzas);
 
 	}
 }

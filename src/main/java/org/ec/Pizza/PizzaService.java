@@ -3,6 +3,8 @@ package org.ec.Pizza;
 import io.javalin.http.BadRequestResponse;
 import org.ec.Pizza.exceptions.PizzaNameAlreadyExists;
 
+import java.util.List;
+
 public class PizzaService {
 
 	private final PizzaRepository pizzaRepository;
@@ -34,5 +36,9 @@ public class PizzaService {
 	public Pizza findPizzaById(int id) {
 		var res = pizzaRepository.findById(id);
 		return res.orElseThrow(() -> new BadRequestResponse("Bad Id Received"));
+	}
+
+	public List<Pizza> getAllPizzas() {
+		return pizzaRepository.findAll();
 	}
 }
