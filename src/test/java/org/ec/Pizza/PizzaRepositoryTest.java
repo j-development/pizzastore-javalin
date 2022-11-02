@@ -48,11 +48,11 @@ public class PizzaRepositoryTest {
 
 
 		//when
-		classUnderTest.deleteById(pizzaId);
 		doNothing().when(classUnderTest).deleteById(pizzaId);
+		classUnderTest.deleteById(pizzaId);
 
 
 		//then
-		Mockito.verify(classUnderTest, Mockito.times(2)).deleteById(pizzaId);
+		Mockito.verify(classUnderTest, Mockito.times(1)).deleteById(pizzaId);
 	}
 }
