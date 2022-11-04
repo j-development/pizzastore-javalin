@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>io.javalin</groupId>
-            <artifactId>javalin</artifactId>
+            <artifactId>javalin-bundle</artifactId>
             <version>5.1.1</version>
         </dependency>
         <dependency>
