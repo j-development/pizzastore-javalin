@@ -39,9 +39,16 @@ Detta är av större vikt då man har en yttre databas som "inte tillhör" progr
 så har vi istället valt att använda oss utav dependency injection direkt i InMemory databasen. Alltså skickar vi in en hashmap när vi skapar mockobjektet repository. 
 Då kan vi utifrån(från testklassen faktiskt styra exakt vad databasen ska innehålla).
 T.ex. kör vi en databas restet inför varje test så att vi på ett enkelt sätt kan räkna ut vad vi bör förvänta oss.
+Vi har också en comparisionStorage som vi innför alla test sätter så den är likvärdig med vår testStorage. Detta för att vi inte vill testa
+en respons direkt mot den faktiska databsen. T.ex. om getPizza metoden råkar radera en pizza och vi testar responsen mot den faktiskta databasen
+kommer vi tro att testet är rätt men den faktiskt har raderat en pizza.
 
 Ibland pratas det om att man endast ska ha en assertion i varje test. Kanske framförallt i unittests. Vi har valt att använda oss
 utav flera assertions i ett test. JUnit ger tydliga felmeddelanden så att det är lätt att utläsa vad som gått fel. Detta
 gör att vi slipper upprepa kod alltför mycket och får mindre testkod att underhålla. Nackdelen är att om en assertion blir fel så ser vi endast
 det felmeddelandet. Det kan finnas en stor vinning i att t.ex. se om respons bodyn har blivit rätt fastän statusen är fel. Detta gör det enklare att
 få reda på vart man ska börja leta efter felet.
+
+En svårighet med att göra både unittester och integrationstester är att det är svårt att veta vart uppdelningen ska vara.
+Det blir lätt att man kanske testar status på flera olika unittester och i integrationstestet. När blir det ett överflöd av tester? När
+är dom relevanta?
