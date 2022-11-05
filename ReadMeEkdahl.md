@@ -1,9 +1,9 @@
-Planen är att bygga upp vår pizza backend från föregående kurs med TDD metodik.
+## Inledning & arbetsmetodik
 
-Vi kommer att inleda med unittester och när varje enskild enhet fungerar kommer vi att gå över
-till integrationstester.
+Läs ReadMeForsmark.md
 
-Integrationstesterna går vi i följande stycke igenom, commit efter commit. Det blir smidigt att referera till en commitlog i denna rapport då det är enkelt att gå tillbaka och minnas vad som gjorts och vad som gått fel, olika övervägningar etc. De kommande rubrikerna är motsvarande commits, där vi behandlar och återger ett sammanhang till commiten. I parentesen så finns en referens till testklassen.
+## Unittester
+Unittesterna går vi i följande stycke igenom, commit efter commit. Det blir smidigt att referera till en commitlog i denna rapport då det är enkelt att gå tillbaka och minnas vad som gjorts och vad som gått fel, olika övervägningar etc. De kommande rubrikerna är motsvarande commits, där vi behandlar och återger ett sammanhang till commiten. I parentesen så finns en referens till testklassen.
 
 (eg)
 ## Detta är commiten (Dettaärtestklasen.java)
@@ -39,4 +39,14 @@ I den konkreta klassen sen så kommer vi antagligen behöva två metoder för at
 
 Till en början vill vi testa så att en GET request till en controllermetod ger oss en lista till alla pizzor. Vi kallar testet ”GET_ToReceiveAllPizzasSuccessfully” och vi behöver mocka getAllPizzas() från servicen  så att får en lista över alla pizzor. I den konkreta klassen så skapar vi en controllermetod som returnerar en Handler, har sett lite olika sätt där man använder statiska implementationer men det sätts i motsats till den generella regeln att man ska undvika static till förmån för objekt för att uppnå separation of concerns och använda sig av dependency injection, för enklare testing och mer modulär kod. På grund av detta så behöver vi i ett senare skede skapa objekt och Overrida repository-interfacet i mainklassen.
 
-Testet var inte heller fullständigt från början men vi uppdaterade med att mocka contexten (mock(Context.class))och använda den för att verifiera att controllermetoden skickar tillbaka pizzorna med json(). 
+Testet var inte heller fullständigt från början men vi uppdaterade med att mocka contexten (mock(Context.class))och använda den för att verifiera att controllermetoden skickar tillbaka pizzorna med json().
+
+Vi började med att implementera unittester för följande:
+POST_ToCreateNewPizzaSuccessfully
+PUT_ToUpdatePizzaSuccessfully
+Båda dessa tester behöver en requestbody i form utav en jsonstring. Vi hittade inget sätt att ändra bodyn för javalins context. Man skulle kunna använda javalins
+test metoder och skapa en mockapp för att testa men så arbetar vi i integrationstesten och med den tidsgränsen vi har valde vi att lämna testet 
+för att visa på problemet men exemplifiera lösningen i integrationstestet istället.
+
+## Integrationstest
+Läs ReadMeForsmark.md
